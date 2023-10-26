@@ -9,7 +9,7 @@ class Printer:
     def save(self, booklet: Booklet, some_name):
         wi = A4[0]/2
         hi = A4[1]/2
-        # Otwórz plik PDF wynikowy
+        # Plik PDF wynikowy
         output_pdf = some_name +"_wyjściowy.pdf"
         c = canvas.Canvas(output_pdf, pagesize=A4)
         max_page_number = -9999
