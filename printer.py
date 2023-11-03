@@ -3,6 +3,8 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.pagesizes import landscape
 from reportlab.pdfgen import canvas
 
+left_margin = -10
+
 class Printer:
     "Class for take preapared Booklet implementation and write it to PDF file"
 
@@ -22,12 +24,12 @@ class Printer:
             if len(pages) > 0:
                 y = hi
                 img = pages[0]
-                c.drawImage(img.path, wi if img.edge == 1 else 0, y, wi, hi, preserveAspectRatio=True)
+                c.drawImage(img.path, wi if img.edge == 1 else left_margin, y, wi, hi, preserveAspectRatio=True)
             if len(pages) > 1:
                 y = hi
 
                 img = pages[1]
-                c.drawImage(img.path, wi if img.edge == 1 else 0, y, wi, hi, preserveAspectRatio=True)
+                c.drawImage(img.path, wi if img.edge == 1 else left_margin, y, wi, hi, preserveAspectRatio=True)
             c.showPage()
         
         c.save()

@@ -5,15 +5,15 @@ import sys
 from printer import Printer
 
 
-def list_jpgs_from_dir(dir_name):
-    return [file for file in os.listdir(dir_name) if file.endswith('.jpg')]
+def list_files_with_ext_from_dir(dir_name, ext):
+    return [file for file in os.listdir(dir_name) if file.endswith('.' + ext)]
 
-def list_jpg_names(dir_name):
-    jpg_files = list_jpgs_from_dir(dir_name)
+def list_filenames_with_ext(dir_name, ext):
+    files = list_files_with_ext_from_dir(dir_name, ext)
     files_in_read_order = []
-    for jpg_file in jpg_files:
+    for file in files:
         #Zapisz sciezke do pliku w tablicy
-        files_in_read_order.append(os.path.join(dir_name, jpg_file))
+        files_in_read_order.append(os.path.join(dir_name, file))
     return files_in_read_order
 
 def exit_program():
@@ -23,6 +23,10 @@ def exit_program():
 def main():
     if len(sys.argv) > 1:
         dir_to_lookup = sys.argv[1]
+        if len(sys.argv) > 2:
+            ext_to_lookup = sys.argv[2]
+        else:
+            ext_to_lookup = 'jpg'
     else:
         print(
 """
@@ -45,7 +49,7 @@ so I implemented such solution ;)
     for p in range(0, len(dir_list)):
         print(".")
         dir_name = dir_list[p]
-        files_in_read_order_a = list_jpg_names(dir_name)
+        files_in_read_order_a = list_filenames_with_ext(dir_name, ext_to_lookup)
         b = Booklet(len(files_in_read_order_a))
         b.assign_images(files_in_read_order_a)
         p = Printer()
